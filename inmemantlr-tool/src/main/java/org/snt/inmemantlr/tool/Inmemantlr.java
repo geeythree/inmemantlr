@@ -105,7 +105,7 @@ public class Inmemantlr {
 
         Option odir = Option.builder()
                 .longOpt("outdir")
-                .desc("output directory in which the dot files will be " +
+                .desc("output directory in which the json files will be " +
                         "created")
                 .required(false)
                 .hasArg(true)
@@ -210,18 +210,18 @@ public class Inmemantlr {
             parseTree = dt.getParseTree();
 
             if (!fpfx.isEmpty()) {
-                String of = fpfx + "/" + FilenameUtils.removeExtension(f.getName()) + ".dot";
+                String of = fpfx + "/" + FilenameUtils.removeExtension(f.getName()) + ".json";
 
                 LOGGER.info("write file {}", of);
 
                 try {
-                    FileUtils.writeStringToFile(new File(of), parseTree.toDot(), "UTF-8");
+                    FileUtils.writeStringToFile(new File(of), parseTree.toJson(), "UTF-8");
                 } catch (IOException e) {
                     LOGGER.error(e.getMessage());
                     System.exit(-1);
                 }
             } else {
-                LOGGER.info("Tree for {} \n {}", f.getName(), parseTree.toDot());
+                LOGGER.info("Tree for {} \n {}", f.getName(), parseTree.toJson());
             }
         }
 
